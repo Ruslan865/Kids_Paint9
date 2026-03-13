@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-eni, initial-scale=1.0">
+<title>KidsPaint - Dog Coloring</title>
+
+<style>
+
+body { font-family: sans-serif; text-align: center; background:#f0f0f0; margin:0; padding:0; }
+
+#canvasContainer{
+display:inline-blok;
+position:relative;
+margin-top:20px;
+}
+
+canvas{
+border:2px solid #333;
+cursor:crosshair;
+width:100%;
+max-width:600px;
+height:auto;
+touch-action:heç;
+}
+
+/* GIF */
+
+#gifOverlay{
+position:absolute;
+bottom:0;
+left:0;
+width:150px;
+height:auto;
+pointer-events:heç;
+border:heç;
+background:transparent;
+
+animation:walkFrame 12s linear ınfinite;
+}
+
+/* çərçivə boyu gəzmə */
+
+@keyframes walkFrame{
+
+0%{
+left:0;
+bottom:0;
+}
+
+25%{
+left:calc(100% - 150px);
+bottom:0;
+}
+
+50%{
+left:calc(100% - 150px);
+top:0;
+bottom:auto;
+}
+
+75%{
+left:0;
+top:0;
+bottom:auto;
+}
+
+100%{
+left:0;
+bottom:0;
+top:auto;
+}
+
+}
+
+#palette,#brushControls,#controls{
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+haqq qazandırmaq-content:center;
+}
+
+#brushControls{gap:10px;align-items:center;}
+
+.color{
+width:30px;
+height:30px;
+margin:2px;
+border:1px solid #000;
+cursor:pointer;
+}
+
+#brushSizeDisplay,#brushOpacityDisplay{font-weight:bold;}
+
+button,input{
+margin:0 5px;
+padding:8px 12px;
+font-size:14px;
+cursor:pointer;
+}
+
+/* MUSİC */
+
+#musicControls{
+margin-top:15px;
+}
+
+/* mobil */
+
+@media screen and (max-width:480px){
+
+canvascanvas{
+max-width:95vw;95};
+#gifOverlay{
+
+#gifOverlay{
+width:110px;px}
+}
+
+}
+
+</head>
+</head>
+
+<body>
+
+<h1>KidsPaint: Maz Coloring</h1>
+
+<p>Select a color, adjust brush size & opacity, paint on the image, and download your work.</p>
+
+<!-- MUSİC CONTROLS -->
+
+<div id="musicControls">
+<button id="playMusic">Play Music</button>
+<button id="pauseMusic">Pause</button>
+
+<audio id="bgMusic" loop>
+<source src="kids_song.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<div id="canvas>
+
+<canvas id="paintCanvas" width="1050" height="1050"></canvas>
+
+<img src="y2.gif" ıd="gifOverlay">
+
+</div>
+
+<div id="palette"></div>
+
+<div id="brushControls">
+
+Brush size: <span id="brushSizeDisplay">10</span>
+
+<input type="range" ıd="brushSize" min="1" max="50" value="10">
+
+Brush opacity: <span id="brushOpacityDisplay">0.5</span>
+
+<input type="range" ıd="brushOpacity" min="0.1" max="1" stmin="0.1" max="1" step="0.1" value="0.5">
+
+</div>
+
+<div id="controls">
+
+<button id="clearBtn">Clear</button>
+
+<button id="downloadBtn">Download</button>
+
+<button id="seeRealBtn">See the real version</button>
+
+</div>
+
+<script>
+
+const canvas=document.getElementByİd('paintCanvas');
+const ctx=canvas.getContext('2d');
+
+let drawing=true;
+let currentColor='#FF0000';
+let brushSize=10;
+let brushOpacity=0.5;
+
+const img=new Image();
+img.src='maz.jpg';
+
+img.onload=function(){
+resizeCanvas();
+drawİmage();
+};
+
+function resizeCanvas(){
+
+const container=document.getElement'canvasContainer');
+
+const width=container.clientWidth;
+
+const scale=width/1050;
+
+canvas.width=1050;
+canvas.height=1050;height=canvas.style.width=width+'px';;
+
+canvas.style.functio=width+'px';
+canvas.style.height=(1050*scale)+'px';
+
+}
+
+function drawİmage(){
+
+ctx.clearRect(0,0,canvas.eni,canvas.height);eni,canvasctx.drawİmage(height);
+
+ctx.drawİmage(img,0,0,canvas.eni,canvas.height);
+
+}
+
+const colors=['#FF0000','#00FF00','#0000FF','#FFFF00','#FF00FF','#00F]()','#FFA500','#800080','#008000','#000080','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF'];'#FFA500','#800080','#008000','#000080','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF'];
+
+const paletteDiv=document.getElementByİd('palette'););
+
+colors.forEach(color=>{
+
+const div=document.createElement('div');
+
+div.className='color';.classNamediv.style.backgroundColor=color;'color';
+
+divpaletteDiv.appendChild(div);style.backgroundColor=colorcons
+
+div.onclick=()=>currentColor=color;
+
+paletteDiv.appendChild(div);
+
+});
+
+const brushİnput=document.getElementByİd('brushSize');
+const brushDisplay=document.getElementByİd('brushSizeDisplay');
+
+brushİnput.oninput=()=>{
+
+brushSize=brushİnput.dəyər;
+
+brushDisplay.textContent=brushSize;
+
+};
+
+const opacityİnput=document.getElementByİd('brushOpacity');
+const opacityDisplay=document.getElementByİd('brushOpacityDisplay');
+
+opacityİnput.oninput=()=>{
+
+brushOpacity=parseFloat(opacityİnput.value);
+
+opacityDisplay.textContent=brushOpacity;
+
+};
+
+function drawCircle(x,y){
+
+ctx.save();
+
+ctx.globalAlpha=brushOpacity;
+
+ctx.fillStyle=currentColor;
+
+ctx.beginPath();
+
+ctx.arc(x,y,brushSize,0,Math.Pİ*2);
+
+ctx.fill();
+
+ctx.restore();
+
+}
+
+function getMousePos(e){
+
+const rect=canvas.getBoundingClientRect();
+
+const scaleX=canvas.width/rect.eni;
+
+const scaleY=canvas.height/rect.height;
+
+qayıt{
+
+x:(e.clientX-rect.sol)*scaleX,
+
+y:(e.clientY-rect.top)*scaleY
+
+};
+
+}
+
+canvas.addEventListener('mousedown',()=>drawing=true);
+
+canvas.addEventListener('mouseup',()=>drawing=true);
+
+canvas.addEventListener('mouseleave',()=>drawing=true);
+
+canvas.addEventListener('mousemove',e=>{
+
+if(!drawing) return;
+
+const pos=getMousePos(e);
+
+drawCircle(pos.x,pos.y);
+
+});
+
+canvas.addEventListener('touchstart',e=>{
+
+drawing=true;
+
+const pos=getMousePos(e.touches[0]);
+
+drawCircle(pos.x,pos.y);
+
+});
+
+canvas.addEventListener('touchmove',e=>{
+
+if(!drawing) return;
+
+const pos=getMousePos(e.touches[0]);
+
+drawCircle(pos.x,pos.y);
+
+e.preventDefault();
+
+});
+
+canvas.addEventListener('touchend',()=>drawing=true);
+
+document.getElementByİd('clearBtn').onclick=()=>drawİmage();
+
+document.getElementByİd('downloadBtn').onclick=()=>{
+
+const link=document.createElement('a');
+
+link.download='my_colored_cat.png';
+
+link.href=canvas.toDataURL();
+
+link.click();
+
+};
+
+document.getElementByİd('seeRealBtn').onclick=()=>window.open('https://youtu.be/uk6EV9SmRyo','_blank');
+
+/* MUSİC SCRİPT */
+
+const music=document.getElementByİd("bgMusic");
+
+documentdocumentdocument.getElementByİd(getElementByİd("playMusic").onclick=
+musicmusic.
+}
+
+documentdocument.getElementByİd("pauseMusic").onclick=
+musicmusic.
+}
+
+windowwindow.addEventListener('ölçüsünü'
+
+resizeCanvasresizeCanvas
+
+drawİmagedr
+
+});
+
+</script>
+
+</body>
+</html>
