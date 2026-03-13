@@ -109,17 +109,17 @@ margin-top:15px;
 
 @media screen and (max-width:480px){
 
-canvascanvas{
-max-width:95vw;95};
-#gifOverlay{
+canvas{
+max-width:95vw;
+}
 
 #gifOverlay{
-width:110px;px}
+width:110px;
 }
 
 }
 
-</head>
+</style>
 </head>
 
 <body>
@@ -129,17 +129,16 @@ width:110px;px}
 <p>Select a color, adjust brush size & opacity, paint on the image, and download your work.</p>
 
 <!-- MUSİC CONTROLS -->
-
 <div id="musicControls">
 <button id="playMusic">Play Music</button>
 <button id="pauseMusic">Pause</button>
-
 <audio id="bgMusic" loop>
-<source src="coloring.mp3" type="audio/mpeg">
+<source src="kids_song.mp3" type="audio/mpeg">
+Your browser does not support audio.
 </audio>
 </div>
 
-<div id="canvas>
+<div id="canvasContainer">
 
 <canvas id="paintCanvas" width="1050" height="1050"></canvas>
 
@@ -157,7 +156,7 @@ Brush size: <span id="brushSizeDisplay">10</span>
 
 Brush opacity: <span id="brushOpacityDisplay">0.5</span>
 
-<input type="range" ıd="brushOpacity" min="0.1" max="1" stmin="0.1" max="1" step="0.1" value="0.5">
+<input type="range" ıd="brushOpacity" min="0.1" max="1" step="0.1" value="0.5">
 
 </div>
 
@@ -191,39 +190,39 @@ drawİmage();
 
 function resizeCanvas(){
 
-const container=document.getElement'canvasContainer');
+const container=document.getElementByİd('canvasContainer');
 
 const width=container.clientWidth;
 
 const scale=width/1050;
 
 canvas.width=1050;
-canvas.height=1050;height=canvas.style.width=width+'px';;
+canvas.height=1050;
 
-canvas.style.functio=width+'px';
+canvas.style.width=width+'px';
 canvas.style.height=(1050*scale)+'px';
 
 }
 
 function drawİmage(){
 
-ctx.clearRect(0,0,canvas.eni,canvas.height);eni,canvasctx.drawİmage(height);
+ctx.clearRect(0,0,canvas.eni,canvas.height);
 
 ctx.drawİmage(img,0,0,canvas.eni,canvas.height);
 
 }
 
-const colors=['#FF0000','#00FF00','#0000FF','#FFFF00','#FF00FF','#00F]()','#FFA500','#800080','#008000','#000080','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF'];'#FFA500','#800080','#008000','#000080','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF'];
+const colors=['#FF0000','#00FF00','#0000FF','#FFFF00','#FF00FF','#00FFFF','#FFA500','#800080','#008000','#000080','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF'];
 
-const paletteDiv=document.getElementByİd('palette'););
+const paletteDiv=document.getElementByİd('palette');
 
 colors.forEach(color=>{
 
 const div=document.createElement('div');
 
-div.className='color';.classNamediv.style.backgroundColor=color;'color';
+div.className='color';
 
-divpaletteDiv.appendChild(div);style.backgroundColor=colorcons
+div.style.backgroundColor=color;
 
 div.onclick=()=>currentColor=color;
 
@@ -349,19 +348,19 @@ document.getElementByİd('seeRealBtn').onclick=()=>window.open('https://youtu.be
 
 const music=document.getElementByİd("bgMusic");
 
-documentdocumentdocument.getElementByİd(getElementByİd("playMusic").onclick=
-musicmusic.
+document.getElementByİd("playMusic").onclick=()=>{
+music.play();
 }
 
-documentdocument.getElementByİd("pauseMusic").onclick=
-musicmusic.
+document.getElementByİd("pauseMusic").onclick=()=>{
+music.pause();
 }
 
-windowwindow.addEventListener('ölçüsünü'
+window.addEventListener('ölçüsünü',()=>{
 
-resizeCanvasresizeCanvas
+resizeCanvas();
 
-drawİmagedr
+drawİmage();
 
 });
 
