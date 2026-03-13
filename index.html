@@ -32,7 +32,7 @@ bottom:0;
 left:0;
 width:150px;
 height:auto;
-pointer-events:heç;
+pointer-events:non;
 border:heç;
 background:transparent;
 
@@ -99,10 +99,10 @@ font-size:14px;
 cursor:pointer;
 }
 
-/* MUSİC */
+/* MUSİC CONTROLS AT BOTTOM */
 
 #musicControls{
-margin-top:15px;
+margin-top:20px;
 }
 
 /* mobil */
@@ -127,16 +127,6 @@ width:110px;
 <h1>KidsPaint: Maz Coloring</h1>
 
 <p>Select a color, adjust brush size & opacity, paint on the image, and download your work.</p>
-
-<!-- MUSİC CONTROLS -->
-<div id="musicControls">
-<button id="playMusic">Play Music</button>
-<button id="pauseMusic">Pause</button>
-<audio id="bgMusic" loop>
-<source src="kids_song.mp3" type="audio/mpeg">
-Your browser does not support audio.
-</audio>
-</div>
 
 <div id="canvasContainer">
 
@@ -168,6 +158,17 @@ Brush opacity: <span id="brushOpacityDisplay">0.5</span>
 
 <button id="seeRealBtn">See the real version</button>
 
+</div>
+
+<!-- MUSİC CONTROLS ADDED BELOW ORİGİNAL ELEMENTS -->
+
+<div id="musicControls">
+<button id="playMusic">Play Music</button>
+<button id="pauseMusic">Pause</button>
+<audio id="bgMusic" loop>
+<source src="kids_song.mp3" type="audio/mpeg">
+Your browser does not support audio.
+</audio>
 </div>
 
 <script>
