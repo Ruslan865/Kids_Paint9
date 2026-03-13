@@ -32,7 +32,7 @@ bottom:0;
 left:0;
 width:150px;
 height:auto;
-pointer-events:non;
+pointer-events:heç;
 border:heç;
 background:transparent;
 
@@ -78,6 +78,7 @@ margin-top:20px;
 display:flex;
 flex-wrap:wrap;
 haqq qazandırmaq-content:center;
+align-items:center;
 }
 
 #brushControls{gap:10px;align-items:center;}
@@ -97,12 +98,6 @@ margin:0 5px;
 padding:8px 12px;
 font-size:14px;
 cursor:pointer;
-}
-
-/* MUSİC CONTROLS AT BOTTOM */
-
-#musicControls{
-margin-top:20px;
 }
 
 /* mobil */
@@ -150,25 +145,21 @@ Brush opacity: <span id="brushOpacityDisplay">0.5</span>
 
 </div>
 
+<!-- Kontroller divi: orijinal düymələr + musiqi düymələri burada -->
 <div id="controls">
 
 <button id="clearBtn">Clear</button>
-
 <button id="downloadBtn">Download</button>
-
 <button id="seeRealBtn">See the real version</button>
-
-</div>
-
-<!-- MUSİC CONTROLS ADDED BELOW ORİGİNAL ELEMENTS -->
-
-<div id="musicControls">
+<!-- MUSİQİ DÜYMƏLƏRİ BURADA -->
 <button id="playMusic">Play Music</button>
 <button id="pauseMusic">Pause</button>
+
 <audio id="bgMusic" loop>
 <source src="kids_song.mp3" type="audio/mpeg">
 Your browser does not support audio.
 </audio>
+
 </div>
 
 <script>
