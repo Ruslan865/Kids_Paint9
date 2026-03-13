@@ -1,39 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-eni, initial-scale=1.0">
-<title>KidsPaint - Maz Coloring</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KidsPaint - Dog Coloring</title>
 
 <style>
-body { font-family: sans-serif; text-align: center; background:#f0f0f0; margin:0; padding:0; }
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background:#f0f0f0;
+  margin:0;
+  padding:0;
+}
 
 #canvasContainer{
- display:inline-blok;
- position:relative;
- margin-top:20px;
+  display:inline-block;
+  position:relative;
+  margin-top:20px;
+  border:2px solid #333;
 }
 
 canvas{
- border:2px solid #333;
- cursor:crosshair;
- width:100%;
- max-width:600px;
- height:auto;
- touch-action:heç;
+  display:block;
+  width:100%;
+  height:auto;
+  cursor:crosshair;
+  touch-action:none;
 }
 
 #gifOverlay{
- position:absolute;
- bottom:0;
- left:0;
- width:150px;
- height:auto;
- pointer-events:heç;
- border:heç;
- background:transparent;
- animation:walkFrame 12s linear ınfinite;
+  position:absolute;
+  width:150px;
+  height:auto;
+  pointer-events:none;
+  border:none;
+  background:transparent;
+  animation:walkFrame 12s linear infinite;
 }
 
 @keyframes walkFrame{
@@ -45,21 +48,21 @@ canvas{
 }
 
 #palette,#brushControls,#controls{
- margin-top:20px;
- display:flex;
- flex-wrap:wrap;
- haqq qazandırmaq-content:center;
- align-items:center;
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
 }
 
 #brushControls{ gap:10px; align-items:center; }
 
 .color{
- width:30px;
- height:30px;
- margin:2px;
- border:1px solid #000;
- cursor:pointer;
+  width:30px;
+  height:30px;
+  margin:2px;
+  border:1px solid #000;
+  cursor:pointer;
 }
 
 #brushSizeDisplay,#brushOpacityDisplay{ font-weight:bold; }
@@ -72,7 +75,6 @@ button,input{ margin:0 5px; padding:8px 12px; font-size:14px; cursor:pointer; }
 }
 </style>
 </head>
-
 <body>
 
 <h1>KidsPaint: Maz Coloring</h1>
@@ -80,47 +82,46 @@ button,input{ margin:0 5px; padding:8px 12px; font-size:14px; cursor:pointer; }
 
 <div id="canvasContainer">
   <canvas id="paintCanvas" width="1050" height="1050"></canvas>
-  <img src="y2.gif" ıd="gifOverlay">
+  <img src="y2.gif" id="gifOverlay">
 </div>
 
 <div id="palette"></div>
 
 <div id="brushControls">
- Brush size: <span id="brushSizeDisplay">10</span>
-  <input type="range" ıd="brushSize" min="1" max="50" value="10">
- Brush opacity: <span id="brushOpacityDisplay">0.5</span>
-  <input type="range" ıd="brushOpacity" min="0.1" max="1" step="0.1" value="0.5">
+  Brush size: <span id="brushSizeDisplay">10</span>
+  <input type="range" id="brushSize" min="1" max="50" value="10">
+  Brush opacity: <span id="brushOpacityDisplay">0.5</span>
+  <input type="range" id="brushOpacity" min="0.1" max="1" step="0.1" value="0.5">
 </div>
 
 <div id="controls">
   <button id="clearBtn">Clear</button>
   <button id="downloadBtn">Download</button>
   <button id="seeRealBtn">See the real version</button>
-  <!-- MUSİQİ DÜYMƏLƏRİ EYNİ CƏRGƏ -->
   <button id="playMusic">Play Music</button>
   <button id="pauseMusic">Pause</button>
   <audio id="bgMusic" loop>
     <source src="kids_song.mp3" type="audio/mpeg">
- Your browser does not support audio.
+    Your browser does not support audio.
   </audio>
 </div>
 
 <script>
-// ORİJİNAL KOD
-const canvas=document.getElementByİd('paintCanvas');
+// ORIJINAL KOD
+const canvas=document.getElementById('paintCanvas');
 const ctx=canvas.getContext('2d');
 
-let drawing=true;
+let drawing=false;
 let currentColor='#FF0000';
 let brushSize=10;
 let brushOpacity=0.5;
 
 const img=new Image();
 img.src='maz.jpg';
-img.onload=function(){ resizeCanvas(); drawİmage(); };
+img.onload=function(){ resizeCanvas(); drawImage(); };
 
 function resizeCanvas(){
-  const container=document.getElementByİd('canvasContainer');
+  const container=document.getElementById('canvasContainer');
   const width=container.clientWidth;
   const scale=width/1050;
   canvas.width=1050;
@@ -129,13 +130,13 @@ function resizeCanvas(){
   canvas.style.height=(1050*scale)+'px';
 }
 
-function drawİmage(){
-  ctx.clearRect(0,0,canvas.eni,canvas.height);
-  ctx.drawİmage(img,0,0,canvas.eni,canvas.height);
+function drawImage(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
 }
 
 const colors=['#FF0000','#00FF00','#0000FF','#FFFF00','#FF00FF','#00FFFF','#FFA500','#800080','#008000','#000080','#FFC0CB','#A52A2A','#808080','#000000','#FFFFFF'];
-const paletteDiv=document.getElementByİd('palette');
+const paletteDiv=document.getElementById('palette');
 colors.forEach(color=>{
   const div=document.createElement('div');
   div.className='color';
@@ -144,29 +145,29 @@ colors.forEach(color=>{
   paletteDiv.appendChild(div);
 });
 
-const brushİnput=document.getElementByİd('brushSize');
-const brushDisplay=document.getElementByİd('brushSizeDisplay');
-brushİnput.oninput=()=>{ brushSize=brushİnput.dəyər; brushDisplay.textContent=brushSize; };
+const brushInput=document.getElementById('brushSize');
+const brushDisplay=document.getElementById('brushSizeDisplay');
+brushInput.oninput=()=>{ brushSize=brushInput.value; brushDisplay.textContent=brushSize; };
 
-const opacityİnput=document.getElementByİd('brushOpacity');
-const opacityDisplay=document.getElementByİd('brushOpacityDisplay');
-opacityİnput.oninput=()=>{ brushOpacity=parseFloat(opacityİnput.value); opacityDisplay.textContent=brushOpacity; };
+const opacityInput=document.getElementById('brushOpacity');
+const opacityDisplay=document.getElementById('brushOpacityDisplay');
+opacityInput.oninput=()=>{ brushOpacity=parseFloat(opacityInput.value); opacityDisplay.textContent=brushOpacity; };
 
 function drawCircle(x,y){
   ctx.save();
   ctx.globalAlpha=brushOpacity;
   ctx.fillStyle=currentColor;
   ctx.beginPath();
-  ctx.arc(x,y,brushSize,0,Math.Pİ*2);
+  ctx.arc(x,y,brushSize,0,Math.PI*2);
   ctx.fill();
   ctx.restore();
 }
 
 function getMousePos(e){
   const rect=canvas.getBoundingClientRect();
-  const scaleX=canvas.width/rect.eni;
+  const scaleX=canvas.width/rect.width;
   const scaleY=canvas.height/rect.height;
-  return { x:(e.clientX-rect.sol)*scaleX, y:(e.clientY-rect.top)*scaleY };
+  return { x:(e.clientX-rect.left)*scaleX, y:(e.clientY-rect.top)*scaleY };
 }
 
 canvas.addEventListener('mousedown',()=>drawing=true);
@@ -177,21 +178,22 @@ canvas.addEventListener('touchstart',e=>{ drawing=true; const pos=getMousePos(e.
 canvas.addEventListener('touchmove',e=>{ if(!drawing) return; const pos=getMousePos(e.touches[0]); drawCircle(pos.x,pos.y); e.preventDefault(); });
 canvas.addEventListener('touchend',()=>drawing=false);
 
-document.getElementByİd('clearBtn').onclick=()=>drawİmage();
-document.getElementByİd('downloadBtn').onclick=()=>{
+document.getElementById('clearBtn').onclick=()=>drawImage();
+document.getElementById('downloadBtn').onclick=()=>{
   const link=document.createElement('a');
-  lınk.download='my_colored_cat.png';
-  lınk.href=canvas.toDataURL();
-  lınk.click();
+  link.download='my_colored_cat.png';
+  link.href=canvas.toDataURL();
+  link.click();
 };
-document.getElementByİd('seeRealBtn').onclick=()=>window.open('https://youtu.be/uk6EV9SmRyo','_blank');
+document.getElementById('seeRealBtn').onclick=()=>window.open('https://youtu.be/uk6EV9SmRyo','_blank');
 
-window.addEventListener('ölçüsünü',()=>{ resizeCanvas(); drawİmage(); });
+window.addEventListener('resize',()=>{ resizeCanvas(); drawImage(); });
 
-// MUSİQİ SCRİPT (AYRİ) - DÜYMƏLƏR CONTROLS İÇİNDƏ
-const music=document.getElementByİd("bgMusic");
-document.getElementByİd("playMusic").onclick=()=>{ music.play(); }
-document.getElementByİd("pauseMusic").onclick=()=>{ music.pause(); }
+// MUSIQI SCRIPT
+const music=document.getElementById("bgMusic");
+document.getElementById("playMusic").onclick=()=>{ music.play(); }
+document.getElementById("pauseMusic").onclick=()=>{ music.pause(); }
 
 </script>
 </body>
+</html>
